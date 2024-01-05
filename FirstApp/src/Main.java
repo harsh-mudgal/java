@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -39,6 +41,14 @@ public class Main {
                     break;
             }
 
+            StringBuilder sb=new StringBuilder();
+            sb.append("This is "); sb.append(78.1);sb.append(" string builder");
+            System.out.println(sb.toString());
+
+            Scanner sc=new Scanner(System.in);
+            System.out.print("Enter line: ");
+            String s=sc.nextLine();  /* .split(" ") this would give an array as output which has splited elements*/
+            System.out.println(s);
         }
         static int printDiffVariables(){
             byte b=23;
