@@ -2,6 +2,7 @@ package org.example;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
+//------------------------------Inheritance--------------------
 class Emp{  // default access modifier is public
     static String ceo;  // related to class and not object
     int salary;  String name;
@@ -30,16 +31,34 @@ class AccountingEmp extends Emp{
         super.print();  // calling overiden function
     }
 }
+//---------------------------------------------Abstract------------
 
-abstract class BaseClass{
-    abstract void run();
+abstract class BaseClass{  // object cannot be created
+    abstract void run(int x);
+    void print(){
+        System.out.println("base class print");
+    }
 }
 class revClass extends BaseClass{
     @Override
-    void run() {
-
+    void run(int y) {
+        System.out.println("override function from base class in revClass:"+y);
     }
 }
+//--------------------------------------Interface-----------------
+
+interface Inter{
+    int a=5; String b="k";// public static final default
+    void print();         // public abstract default
+}
+class subInter implements Inter {
+
+    @Override
+    public void print() {
+        System.out.println("implementing Interface :"+a);
+    }
+}
+//------------------------------------------------------------------
 public class Main {
     public static void main(String[] args) {
         AccountingEmp emp1=new AccountingEmp(1000,"Harsh","ABC",24);
@@ -53,5 +72,10 @@ public class Main {
         emp1.print();
         emp2.print();
 
+        revClass obj=new revClass();
+        obj.print();obj.run(9);
+
+        subInter obj2=new subInter();
+        obj2.print();
     }
 }
