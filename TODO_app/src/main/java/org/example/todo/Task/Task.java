@@ -49,6 +49,7 @@ public class Task {
         if(printDate){
             System.out.println(date);
         }
+        System.out.println("Id: "+id);
         System.out.println("Title: " + title);
         System.out.println("Description: "+ description);
         System.out.println("Completed: " + (completed? "Yes":"NO") );
