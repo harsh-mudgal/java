@@ -33,7 +33,7 @@ public class Main {
                     break;
 
                 case "1":
-                    System.out.println("Enter task in the format <Date(eg:09/01/24)>:<Title>:<Description> ");
+                    System.out.println("Enter task in the format <Date(eg:dd/mm/yyyy)>:<Title>:<Description> ");
                     String t=sc.nextLine();
                     boolean x=todoApp.addTask(t);
                     successError(x);
