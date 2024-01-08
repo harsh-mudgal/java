@@ -10,9 +10,12 @@ public class Task {
 
     private boolean completed;
 
-    private static DateTimeFormatter formatter ;
-    public Task(int id,String title,String description , String date){
+    private static final DateTimeFormatter formatter ;
+    static{
         formatter =DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    }
+    public Task(int id,String title,String description , String date){
+        //formatter =DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.id=id;  this.title=title; this.description=description;
         this.date=LocalDate.parse(date,formatter);
         this.completed=false;
