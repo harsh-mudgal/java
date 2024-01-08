@@ -2,25 +2,54 @@ package org.example;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+public  class Main {
     private static int[] buffer;
     private static int count;
 
-    static class Producer{
-        void produce(){
-            while(isFull(buffer)){
+    private static final Object lock=new Object();
+    static class Producer {
+        void produce() {
+//            synchronized (lock) {         Using synchronized
+//                while (isFull(buffer)) {
+//                }
+//                buffer[count++] = 1;
+//            }
 
-            }
-            buffer[count++]=1;
+              synchronized (lock){
+                  if(isFull(buffer)) {
+                      try {
+                          lock.wait();
+                      }
+                      catch (Exception e){
+                          System.out.println(e.getMessage());
+                      }
+                  }
+                  buffer[count++] = 1;
+                  lock.notify();
+              }
         }
     }
 
-    static class Consumer{
-        void consume(){
-            while(isEmpty(buffer)){
+    static class Consumer {
+        void consume() {
+//            synchronized (lock) {          Using synchronized
+//                while (isEmpty(buffer)) {
+//                }
+//                buffer[--count] = 0;
+//            }
 
+            synchronized (lock){
+                if(isEmpty(buffer)) {
+                    try {
+                        lock.wait();
+                    }
+                    catch (Exception e){
+                        System.out.println(e.getMessage());
+                    }
+                }
+                buffer[--count] = 0;
+                lock.notify();
             }
-            buffer[--count]=0;
         }
     }
     static boolean isEmpty(int[] buf){
@@ -36,13 +65,13 @@ public class Main {
         Producer prod=new Producer();
         Consumer cons=new Consumer();
         Runnable produceTask=()->{
-            for(int i=0;i<50;i++){
+            for(int i=0;i<55;i++){
                 prod.produce();
             }
             System.out.println("Done Producing");
         };
         Runnable consumeTask=()->{
-            for(int i=0;i<50;i++){
+            for(int i=0;i<53;i++){
                 cons.consume();
             }
             System.out.println("Done Consuming");
