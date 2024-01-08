@@ -7,7 +7,7 @@ import java.util.*;
 public class TodoApp implements todoInterface {
     static int tot=0;
     HashMap<Integer,Task> map=new HashMap<>();
-    HashMap<String,ArrayList<Integer>> dateWiseMap=new HashMap<>();
+    TreeMap<String,ArrayList<Integer>> dateWiseMap=new TreeMap<>();
     @Override
     public boolean addTask(String s){
         String[] arr=s.split(":");
@@ -68,7 +68,7 @@ public class TodoApp implements todoInterface {
 
     @Override
     public void getTasksByDate() {
-        for (HashMap.Entry<String, ArrayList<Integer>> entry : dateWiseMap.entrySet()) {
+        for (Map.Entry<String, ArrayList<Integer>> entry : dateWiseMap.entrySet()) {
             String date = entry.getKey();
             ArrayList<Integer> ids = entry.getValue();
             if(ids.isEmpty()){
