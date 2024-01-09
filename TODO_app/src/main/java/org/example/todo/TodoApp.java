@@ -2,15 +2,17 @@ package org.example.todo;
 
 import org.example.todo.Task.Task;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class TodoApp implements todoInterface {
     static int tot=0;
-    HashMap<Integer,Task> map=new HashMap<>();
-    HashMap<String,ArrayList<Integer>> dateWiseMap=new HashMap<>();
+    Map<Integer,Task> map=new HashMap<>();
+    Map<LocalDate,ArrayList<Integer>> dateWiseMap=new TreeMap<>();
+
     @Override
     public boolean addTask(String s){
-        String[] arr=s.split(":");
+        String[] arr=s.split(":");  // date,title,desc
         try {
             Task task = new Task(tot + 1, arr[1], arr[2], arr[0]);
             tot++;
@@ -68,8 +70,8 @@ public class TodoApp implements todoInterface {
 
     @Override
     public void getTasksByDate() {
-        for (HashMap.Entry<String, ArrayList<Integer>> entry : dateWiseMap.entrySet()) {
-            String date = entry.getKey();
+        for (Map.Entry<LocalDate, ArrayList<Integer>> entry : dateWiseMap.entrySet()) {
+            LocalDate date = entry.getKey();
             ArrayList<Integer> ids = entry.getValue();
             if(ids.isEmpty()){
                 continue;
