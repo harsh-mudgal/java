@@ -1,15 +1,23 @@
 package org.example.todo.Task;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Task {
     private int id;
     private String title;
     private String description;
-    private String date;  // day/month/year   09/01/2024
+    private LocalDate date;  // day/month/year   09/01/2024
 
     private boolean completed;
 
+    private static final DateTimeFormatter formatter ;
+    static{
+        formatter =DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    }
     public Task(int id,String title,String description , String date){
-        this.id=id;  this.title=title; this.description=description; this.date=date;
+        //formatter =DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        this.id=id;  this.title=title; this.description=description;
+        this.date=LocalDate.parse(date,formatter);
         this.completed=false;
     }
 
@@ -34,11 +42,11 @@ public class Task {
         this.description = description;
     }
 
-    public String getDate() {                          // date
+    public LocalDate getDate() {                          // date
         return date;
     }
     public void setDate(String date) {
-        this.date = date;
+        this.date = LocalDate.parse(date,formatter);
     }
 
     public void setCompleted(boolean x){this.completed=x;}
@@ -47,7 +55,7 @@ public class Task {
 
     public void printTask(boolean printDate){
         if(printDate){
-            System.out.println(date);
+            System.out.println(formatter.format(date));
         }
         System.out.println("Id: "+id);
         System.out.println("Title: " + title);
