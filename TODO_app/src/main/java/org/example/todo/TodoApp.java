@@ -7,8 +7,8 @@ import java.util.*;
 
 public class TodoApp implements todoInterface {
     static int tot=0;
-    HashMap<Integer,Task> map=new HashMap<>();
-    TreeMap<LocalDate,ArrayList<Integer>> dateWiseMap=new TreeMap<>();
+    Map<Integer,Task> map=new HashMap<>();
+    Map<LocalDate,ArrayList<Integer>> dateWiseMap=new TreeMap<>();
 
     @Override
     public boolean addTask(String s){
